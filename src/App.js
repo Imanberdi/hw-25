@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+
+import { useSelector } from 'react-redux';
 import './App.css';
+import LoginForm from './components/LoginForm'
+import { ShowLoading } from './components/ShowLoading';
+import { UserProfile } from './components/UserProfile';
+import Card from './components/UI/Card';
+
+
 
 function App() {
+
+  const isLogeding = useSelector((state) => state.ui.isLogeding)
+  const isLoading = useSelector((state) => state.ui.isLoading)
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Card>
+        {!isLogeding && <LoginForm />}
+        {isLogeding && <UserProfile />}
+        {isLoading && <ShowLoading />}
+      </Card>
+
     </div>
   );
 }
